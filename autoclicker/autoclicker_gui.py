@@ -19,6 +19,7 @@ def toggle_clicking():
     if clicking:
         clicking = False
         status_label.config(text="Auto-clicker arrêté")
+        toggle_button.config(text="Démarrer", background="green", foreground="white")
     else:
         try:
             interval = float(interval_entry.get())
@@ -31,6 +32,7 @@ def toggle_clicking():
         click_thread = threading.Thread(target=click_loop, args=(interval,), daemon=True)
         click_thread.start()
         status_label.config(text="Auto-clicker démarré")
+        toggle_button.config(text="Arrêter", background="red", foreground="white")
 
 def click_loop(interval):
     """Fonction qui effectue le clic à intervalle régulier"""
@@ -75,12 +77,14 @@ def toggle_vary_interval():
     global vary_interval
     vary_interval = not vary_interval
     status_label.config(text=f"Variation de l'intervalle {'activée' if vary_interval else 'désactivée'}")
+    vary_interval_button.config(text=f"Variation Intervalle {'On' if vary_interval else 'Off'}")
 
 def toggle_shake_cursor():
     """Fonction pour activer/désactiver le tremblement du curseur"""
     global shake_cursor
     shake_cursor = not shake_cursor
     status_label.config(text=f"Tremblement du curseur {'activé' if shake_cursor else 'désactivé'}")
+    shake_cursor_button.config(text=f"Tremblement Curseur {'On' if shake_cursor else 'Off'}")
 
 # Création de l'interface graphique avec Tkinter
 root = tk.Tk()
@@ -99,15 +103,15 @@ interval_entry.insert(0, "0.0005")  # Valeur par défaut pour 2000 clics par sec
 set_key_button = ttk.Button(mainframe, text="Définir Touche", command=set_key)
 set_key_button.grid(row=1, column=0, pady=10, sticky=tk.W)
 
-toggle_button = ttk.Button(mainframe, text="Démarrer", command=toggle_clicking)
+toggle_button = tk.Button(mainframe, text="Démarrer", command=toggle_clicking, background="green", foreground="white")
 toggle_button.grid(row=2, column=0, pady=10, sticky=tk.W)
 
 # Bouton pour activer/désactiver la variation de l'intervalle
-vary_interval_button = ttk.Button(mainframe, text="Activer/Désactiver Variation Intervalle", command=toggle_vary_interval)
+vary_interval_button = ttk.Button(mainframe, text="Variation Intervalle Off", command=toggle_vary_interval)
 vary_interval_button.grid(row=3, column=0, pady=10, sticky=tk.W)
 
 # Bouton pour activer/désactiver le tremblement du curseur
-shake_cursor_button = ttk.Button(mainframe, text="Activer/Désactiver Tremblement Curseur", command=toggle_shake_cursor)
+shake_cursor_button = ttk.Button(mainframe, text="Tremblement Curseur Off", command=toggle_shake_cursor)
 shake_cursor_button.grid(row=4, column=0, pady=10, sticky=tk.W)
 
 # Label de statut pour afficher l'état
