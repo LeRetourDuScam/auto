@@ -1,0 +1,8 @@
+setup.py
+autoclicker/__init__.py
+autoclicker/main.py
+autoclicker.egg-info/PKG-INFO
+autoclicker.egg-info/SOURCES.txt
+autoclicker.egg-info/dependency_links.txt
+autoclicker.egg-info/entry_points.txt
+autoclicker.egg-info/top_level.txt

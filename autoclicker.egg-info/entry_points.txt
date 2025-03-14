@@ -1,0 +1,2 @@
+[console_scripts]
+run_project = autoclicker.main:main
